@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GALLERY ―― AMERICA ON AIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233F;
+    --navy-deep:#0E1730;
+    --red:#B7293C;
+    --red-deep:#8C1F2E;
+    --cream:#F6F1E4;
+    --white:#FFFFFF;
+    --brass:#B8925A;
+    --ink:#1B1B1B;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    line-height:1.75;
+  }
+  a{color:inherit;}
+
+  .display{font-family:'Bebas Neue', sans-serif; letter-spacing:0.04em;}
+  .type{font-family:'Special Elite', monospace; letter-spacing:0.02em;}
+
+  /* ===== Header (shared) ===== */
+  header{
+    background:var(--navy);
+    color:var(--cream);
+    border-bottom:4px solid var(--brass);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .nameplate{
+    max-width:1080px;
+    margin:0 auto;
+    padding:14px 24px 10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .callsign{display:flex; align-items:baseline; gap:12px;}
+  .callsign .display{
+    font-size:clamp(1.6rem, 4vw, 2.2rem);
+    color:var(--white);
+  }
+  .callsign .sub{
+    font-size:0.7rem;
+    letter-spacing:0.18em;
+    color:var(--brass);
+    text-transform:uppercase;
+  }
+  .onair{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Special Elite', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    color:#e8c3c9;
+    border:1px solid rgba(255,255,255,0.25);
+    padding:5px 10px;
+  }
+  .onair-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--red);
+    box-shadow:0 0 6px var(--red);
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.35;}}
+  @media (prefers-reduced-motion: reduce){ .onair-dot{animation:none;} }
+
+  nav{border-top:1px solid rgba(255,255,255,0.15);}
+  nav ul{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+    list-style:none;
+    display:flex;
+    gap:2px;
+    flex-wrap:wrap;
+  }
+  nav a{
+    display:block;
+    padding:11px 18px;
+    text-decoration:none;
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:0.1em;
+    font-size:0.95rem;
+    color:var(--cream);
+    border-right:1px solid rgba(255,255,255,0.12);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  nav a:hover, nav a.active{ background:var(--red); color:var(--white); }
+
+  /* ===== Pinstripe divider ===== */
+  .pinstripe{
+    height:6px;
+    background:repeating-linear-gradient(90deg, var(--red) 0 10px, var(--white) 10px 12px, var(--navy) 12px 22px, var(--white) 22px 24px);
+  }
+
+  /* ===== Page head ===== */
+  .page-head{
+    background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:var(--cream);
+    padding:44px 24px 34px;
+  }
+  .page-head-inner{max-width:1080px; margin:0 auto;}
+  .freq-badge{
+    display:inline-block;
+    font-family:'Special Elite', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.14em;
+    color:var(--red);
+    background:rgba(183,41,60,0.12);
+    border:1px solid var(--red);
+    padding:4px 10px;
+    margin-bottom:16px;
+  }
+  .page-head h1{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:clamp(2.2rem, 6vw, 3.4rem);
+    margin:0 0 8px;
+    color:var(--white);
+    letter-spacing:0.03em;
+  }
+  .page-head p{
+    color:#cfd6e6;
+    font-style:italic;
+    margin:0;
+    max-width:560px;
+  }
+
+  /* ===== Archive grid ===== */
+  main{max-width:1080px; margin:0 auto; padding:46px 24px 20px;}
+
+  .section-eyebrow{
+    font-family:'Special Elite', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--red);
+    margin:0 0 8px;
+  }
+  h2{
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:0.03em;
+    font-size:clamp(1.6rem, 4vw, 2.2rem);
+    margin:0 0 30px;
+    color:var(--navy);
+  }
+
+  .archive-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:26px;
+  }
+
+  .frame{
+    background:var(--white);
+    border:1px solid rgba(22,35,63,0.15);
+    padding:10px 10px 16px;
+  }
+  .frame-photo{
+    aspect-ratio:4/3;
+    background:
+      repeating-linear-gradient(135deg, rgba(22,35,63,0.06) 0 2px, transparent 2px 10px),
+      var(--cream);
+    border:1px dashed var(--brass);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:14px;
+    position:relative;
+  }
+  .frame-photo::before, .frame-photo::after{
+    content:"";
+    position:absolute;
+    width:10px; height:10px;
+    border:2px solid var(--brass);
+  }
+  .frame-photo::before{ top:6px; left:6px; border-right:none; border-bottom:none; }
+  .frame-photo::after{ bottom:6px; right:6px; border-left:none; border-top:none; }
+  .frame-photo span{
+    font-family:'Special Elite', monospace;
+    font-size:0.72rem;
+    color:#8a8a8a;
+    line-height:1.6;
+  }
+  .frame-cap{
+    padding:12px 4px 0;
+  }
+  .frame-cap .tag{
+    display:inline-block;
+    font-family:'Special Elite', monospace;
+    font-size:0.62rem;
+    letter-spacing:0.08em;
+    color:var(--red);
+    text-transform:uppercase;
+    margin-bottom:4px;
+  }
+  .frame-cap .title{
+    display:block;
+    font-size:0.92rem;
+    color:var(--ink);
+  }
+
+  .note{
+    margin-top:44px;
+    border-left:4px solid var(--red);
+    background:#fff;
+    padding:18px 22px;
+    font-family:'Special Elite', monospace;
+    font-size:0.82rem;
+    color:#4a4a4a;
+    line-height:1.9;
+  }
+
+  /* ===== Footer ===== */
+  footer{ margin-top:70px; background:var(--navy-deep); color:#a9b2c9; }
+  .foot-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:30px 24px 40px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:14px;
+    font-size:0.78rem;
+  }
+  .foot-inner .display{ color:var(--cream); font-size:1.1rem; }
+  .foot-note{
+    font-family:'Special Elite', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.04em;
+    color:#7c86a0;
+  }
+
+  @media (max-width:640px){
+    nav a{border-right:none; border-bottom:1px solid rgba(255,255,255,0.1); flex:1 1 45%;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nameplate">
+    <div class="callsign">
+      <span class="display">AMERICA ON AIR</span>
+      <span class="sub">アメリカ史 学習放送局</span>
+    </div>
+    <div class="onair"><span class="onair-dot"></span>ON AIR — 24 HOURS</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="blog.html">BLOG</a></li>
+      <li><a href="gallery.html" class="active">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="page-head">
+  <div class="page-head-inner">
+    <span class="freq-badge">ARCHIVE ROOM</span>
+    <h1>GALLERY</h1>
+    <p>資料室。歴史にまつわる図版やイラスト、メモを保管しています。</p>
+  </div>
+</section>
+
+<div class="pinstripe"></div>
+
+<main>
+  <p class="section-eyebrow">Filed Materials</p>
+  <h2>アーカイブ</h2>
+
+  <!--
+    画像を追加する場合は .frame-photo の中身を
+    <img src="images/xxx.jpg" alt="キャプション"> に差し替えてください。
+    （.frame-photo に object-fit:cover; width:100%; height:100%; を足すと収まりが良くなります）
+  -->
+
+  <div class="archive-grid">
+
+    <figure class="frame">
+      <div class="frame-photo"><span>IMAGE<br>PLACEHOLDER</span></div>
+      <figcaption class="frame-cap">
+        <span class="tag">Illust</span>
+        <span class="title">キャプションが入ります</span>
+      </figcaption>
+    </figure>
+
+    <figure class="frame">
+      <div class="frame-photo"><span>IMAGE<br>PLACEHOLDER</span></div>
+      <figcaption class="frame-cap">
+        <span class="tag">Photo</span>
+        <span class="title">キャプションが入ります</span>
+      </figcaption>
+    </figure>
+
+    <figure class="frame">
+      <div class="frame-photo"><span>IMAGE<br>PLACEHOLDER</span></div>
+      <figcaption class="frame-cap">
+        <span class="tag">Map</span>
+        <span class="title">キャプションが入ります</span>
+      </figcaption>
+    </figure>
+
+    <figure class="frame">
+      <div class="frame-photo"><span>IMAGE<br>PLACEHOLDER</span></div>
+      <figcaption class="frame-cap">
+        <span class="tag">Illust</span>
+        <span class="title">キャプションが入ります</span>
+      </figcaption>
+    </figure>
+
+    <figure class="frame">
+      <div class="frame-photo"><span>IMAGE<br>PLACEHOLDER</span></div>
+      <figcaption class="frame-cap">
+        <span class="tag">Photo</span>
+        <span class="title">キャプションが入ります</span>
+      </figcaption>
+    </figure>
+
+    <figure class="frame">
+      <div class="frame-photo"><span>IMAGE<br>PLACEHOLDER</span></div>
+      <figcaption class="frame-cap">
+        <span class="tag">Document</span>
+        <span class="title">キャプションが入ります</span>
+      </figcaption>
+    </figure>
+
+  </div>
+
+  <p class="note">NOTE — 画像が用意でき次第、順次差し替えていきます。</p>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div>
+      <span class="display">AMERICA ON AIR</span><br>
+      <span class="foot-note">A small station broadcasting American history, one entry at a time.</span>
+    </div>
+    <div class="foot-note">© 2026 Azalea Creative Room</div>
+  </div>
+</footer>
+
+</body>
+</html>
