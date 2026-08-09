@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMERICA ON AIR ―― アメリカ史 学習放送局</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233F;
+    --navy-deep:#0E1730;
+    --red:#B7293C;
+    --red-deep:#8C1F2E;
+    --cream:#F6F1E4;
+    --white:#FFFFFF;
+    --brass:#B8925A;
+    --ink:#1B1B1B;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    line-height:1.75;
+  }
+  a{color:inherit;}
+
+  .display{font-family:'Bebas Neue', sans-serif; letter-spacing:0.04em;}
+  .type{font-family:'Special Elite', monospace; letter-spacing:0.02em;}
+
+  /* ===== Header ===== */
+  header{
+    background:var(--navy);
+    color:var(--cream);
+    border-bottom:4px solid var(--brass);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .nameplate{
+    max-width:1080px;
+    margin:0 auto;
+    padding:14px 24px 10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .callsign{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+  }
+  .callsign .display{
+    font-size:clamp(1.6rem, 4vw, 2.2rem);
+    color:var(--white);
+  }
+  .callsign .sub{
+    font-size:0.7rem;
+    letter-spacing:0.18em;
+    color:var(--brass);
+    text-transform:uppercase;
+  }
+  .onair{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Special Elite', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    color:#e8c3c9;
+    border:1px solid rgba(255,255,255,0.25);
+    padding:5px 10px;
+  }
+  .onair-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--red);
+    box-shadow:0 0 6px var(--red);
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:0.35;}
+  }
+
+  nav{
+    border-top:1px solid rgba(255,255,255,0.15);
+  }
+  nav ul{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+    list-style:none;
+    display:flex;
+    gap:2px;
+    flex-wrap:wrap;
+  }
+  nav a{
+    display:block;
+    padding:11px 18px;
+    text-decoration:none;
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:0.1em;
+    font-size:0.95rem;
+    color:var(--cream);
+    border-right:1px solid rgba(255,255,255,0.12);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  nav a:hover, nav a.active{
+    background:var(--red);
+    color:var(--white);
+  }
+
+  /* ===== Hero / Dial ===== */
+  .hero{
+    background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:var(--cream);
+    padding:56px 24px 44px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:repeating-linear-gradient(180deg, rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+  }
+  .hero-inner{
+    max-width:1080px;
+    margin:0 auto;
+    position:relative;
+  }
+  .freq-badge{
+    display:inline-block;
+    font-family:'Special Elite', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.14em;
+    color:var(--red);
+    background:rgba(183,41,60,0.12);
+    border:1px solid var(--red);
+    padding:4px 10px;
+    margin-bottom:18px;
+  }
+  h1.hero-title{
+    font-size:clamp(2.4rem, 7vw, 4.6rem);
+    margin:0 0 6px;
+    line-height:0.95;
+    color:var(--white);
+  }
+  .hero-title span{color:var(--red);}
+  .hero-tag{
+    font-style:italic;
+    font-size:1.02rem;
+    color:#cfd6e6;
+    max-width:520px;
+    margin:0 0 40px;
+  }
+
+  /* --- dial --- */
+  .dial-wrap{
+    border:1px solid var(--brass);
+    background:rgba(0,0,0,0.18);
+    padding:22px 20px 16px;
+    overflow-x:auto;
+  }
+  .dial-label{
+    display:flex;
+    justify-content:space-between;
+    font-family:'Special Elite', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    color:var(--brass);
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .dial-scale{
+    position:relative;
+    min-width:600px;
+    height:74px;
+    border-top:2px solid rgba(246,241,228,0.5);
+  }
+  .tick{
+    position:absolute;
+    top:0;
+    transform:translateX(-50%);
+    text-align:center;
+  }
+  .tick .bar{
+    width:1px;
+    height:14px;
+    background:rgba(246,241,228,0.55);
+    margin:0 auto;
+  }
+  .tick.major .bar{height:22px; background:var(--cream); width:2px;}
+  .tick em{
+    display:block;
+    font-style:normal;
+    font-family:'Special Elite', monospace;
+    font-size:0.72rem;
+    color:var(--cream);
+    margin-top:6px;
+    white-space:nowrap;
+  }
+  .tick small{
+    display:block;
+    font-size:0.62rem;
+    color:#93a0bd;
+    white-space:nowrap;
+    margin-top:2px;
+  }
+  .needle{
+    position:absolute;
+    top:-2px;
+    width:2px;
+    height:60px;
+    background:var(--red);
+    box-shadow:0 0 8px rgba(183,41,60,0.8);
+    left:40.3%;
+    animation:drift 9s ease-in-out infinite;
+  }
+  .needle::before{
+    content:"";
+    position:absolute;
+    top:-5px; left:50%;
+    transform:translateX(-50%);
+    width:0; height:0;
+    border-left:5px solid transparent;
+    border-right:5px solid transparent;
+    border-top:6px solid var(--red);
+  }
+  @keyframes drift{
+    0%,100%{left:40.3%;}
+    50%{left:41.6%;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .needle{animation:none;}
+    .onair-dot{animation:none;}
+  }
+
+  /* ===== Pinstripe divider ===== */
+  .pinstripe{
+    height:6px;
+    background:repeating-linear-gradient(90deg, var(--red) 0 10px, var(--white) 10px 12px, var(--navy) 12px 22px, var(--white) 22px 24px);
+  }
+
+  /* ===== Broadcast intro ===== */
+  main{max-width:1080px; margin:0 auto; padding:52px 24px 20px;}
+  .section-eyebrow{
+    font-family:'Special Elite', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--red);
+    margin:0 0 8px;
+  }
+  h2{
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:0.03em;
+    font-size:clamp(1.6rem, 4vw, 2.2rem);
+    margin:0 0 18px;
+    color:var(--navy);
+  }
+  .broadcast-card{
+    background:var(--white);
+    border:1px solid rgba(22,35,63,0.15);
+    border-left:4px solid var(--navy);
+    padding:30px 28px;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:26px;
+    align-items:start;
+  }
+  .broadcast-card .slot{
+    font-family:'Special Elite', monospace;
+    font-size:0.72rem;
+    color:var(--navy);
+    border:1px solid var(--navy);
+    padding:6px 10px;
+    white-space:nowrap;
+  }
+  .broadcast-card p{margin:0 0 14px; color:#333;}
+  .broadcast-card p:last-child{margin-bottom:0;}
+
+  /* ===== Presets ===== */
+  .presets{
+    margin-top:56px;
+  }
+  .preset-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:20px;
+  }
+  .preset{
+    display:block;
+    text-decoration:none;
+    background:var(--navy);
+    color:var(--cream);
+    padding:26px 22px;
+    position:relative;
+    border:1px solid var(--navy);
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  .preset:hover{
+    background:var(--red-deep);
+    transform:translateY(-3px);
+  }
+  .preset .num{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:34px; height:34px;
+    border:2px solid var(--brass);
+    border-radius:50%;
+    font-family:'Special Elite', monospace;
+    font-size:0.72rem;
+    margin-bottom:16px;
+  }
+  .preset .display{
+    font-size:1.5rem;
+    display:block;
+    margin-bottom:6px;
+    color:var(--white);
+  }
+  .preset .desc{
+    font-size:0.85rem;
+    color:#c7cfe0;
+    line-height:1.6;
+  }
+
+  /* ===== Footer ===== */
+  footer{
+    margin-top:70px;
+    background:var(--navy-deep);
+    color:#a9b2c9;
+  }
+  .foot-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:30px 24px 40px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:14px;
+    font-size:0.78rem;
+  }
+  .foot-inner .display{
+    color:var(--cream);
+    font-size:1.1rem;
+  }
+  .foot-note{
+    font-family:'Special Elite', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.04em;
+    color:#7c86a0;
+  }
+
+  @media (max-width:640px){
+    .broadcast-card{grid-template-columns:1fr;}
+    nav a{border-right:none; border-bottom:1px solid rgba(255,255,255,0.1); flex:1 1 45%;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nameplate">
+    <div class="callsign">
+      <span class="display">AMERICA ON AIR</span>
+      <span class="sub">アメリカ史 学習放送局</span>
+    </div>
+    <div class="onair"><span class="onair-dot"></span>ON AIR — 24 HOURS</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html" class="active">HOME</a></li>
+      <li><a href="blog.html">BLOG</a></li>
+      <li><a href="gallery.html">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="freq-badge">FREQ. 1776 kHz</span>
+    <h1 class="hero-title">HISTORY<br><span>ON THE AIR</span></h1>
+    <p class="hero-tag">ジェームズタウンから現代まで。アメリカの歴史を、ひとつの小さな電波に乗せて。</p>
+
+    <div class="dial-wrap">
+      <div class="dial-label">
+        <span>TUNING DIAL</span>
+        <span>1607 — 2026</span>
+      </div>
+      <div class="dial-scale">
+        <div class="tick major" style="left:0%"><div class="bar"></div><em>1607</em><small>Jamestown</small></div>
+        <div class="tick major" style="left:40.3%"><div class="bar"></div><em>1776</em><small>独立宣言</small></div>
+        <div class="tick major" style="left:61.6%"><div class="bar"></div><em>1865</em><small>南北戦争終結</small></div>
+        <div class="tick" style="left:76.8%"><div class="bar"></div><em>1929</em><small>大恐慌</small></div>
+        <div class="tick" style="left:86.4%"><div class="bar"></div><em>1969</em><small>月面着陸</small></div>
+        <div class="tick major" style="left:100%"><div class="bar"></div><em>NOW</em><small>2026</small></div>
+        <div class="needle"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="pinstripe"></div>
+
+<main>
+  <section>
+    <p class="section-eyebrow">Now Broadcasting</p>
+    <h2>本日の放送より</h2>
+    <div class="broadcast-card">
+      <span class="slot">ON-AIR</span>
+      <div>
+        <p>このサイトは、アメリカ史を学ぶ個人的な記録局です。植民地時代から現代まで、気になった出来事や人物、読んだ本の感想などを、放送日誌のような形で残していきます。</p>
+        <p>専門的な歴史サイトというより、ラジオ局の日誌帳に近いイメージ。学んだことをそのまま流す、小さな私設放送局だと思ってください。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="presets">
+    <p class="section-eyebrow">Preset Channels</p>
+    <h2>プリセット局</h2>
+    <div class="preset-grid">
+      <a class="preset" href="blog.html">
+        <span class="num">01</span>
+        <span class="display">BLOG</span>
+        <span class="desc">日々の学習記録。日付と短い日誌のみのシンプルな放送日誌。</span>
+      </a>
+      <a class="preset" href="gallery.html">
+        <span class="num">02</span>
+        <span class="display">GALLERY</span>
+        <span class="desc">歴史にまつわる資料や図版、イラストのアーカイブ。</span>
+      </a>
+      <a class="preset" href="about.html">
+        <span class="num">03</span>
+        <span class="display">ABOUT</span>
+        <span class="desc">この放送局について、そして局長（管理人）の紹介。</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div>
+      <span class="display">AMERICA ON AIR</span><br>
+      <span class="foot-note">A small station broadcasting American history, one entry at a time.</span>
+    </div>
+    <div class="foot-note">© 2026 Azalea Creative Room</div>
+  </div>
+</footer>
+
+</body>
+</html>
