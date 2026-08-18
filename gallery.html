@@ -230,6 +230,93 @@
     line-height:1.9;
   }
 
+  .report-section{
+    margin-top:48px;
+  }
+  .page-title{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:18px;
+  }
+  .page-title .section-deco{
+    color:var(--red);
+    font-size:0.9rem;
+  }
+  .page-title h3{
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:0.06em;
+    font-size:1.15rem;
+    color:var(--navy);
+    margin:0;
+    text-transform:uppercase;
+  }
+  .page-title .section-line{
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, var(--brass), transparent);
+  }
+
+  .report-card{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    text-decoration:none;
+    background:var(--white);
+    border:1px solid rgba(22,35,63,0.15);
+    border-left:4px solid var(--navy);
+    padding:20px 24px;
+    transition:border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+  }
+  .report-card:hover{
+    border-left-color:var(--red);
+    background:#fffdf8;
+    transform:translateX(2px);
+  }
+  .report-num{
+    flex-shrink:0;
+    font-family:'Special Elite', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.06em;
+    color:var(--red);
+    border:1px solid var(--red);
+    padding:5px 9px;
+    white-space:nowrap;
+  }
+  .report-body{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    min-width:0;
+  }
+  .report-title{
+    font-size:1rem;
+    color:var(--ink);
+    font-weight:600;
+  }
+  .report-desc{
+    font-family:'Special Elite', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.02em;
+    color:#8a8a8a;
+  }
+  .report-arrow{
+    flex-shrink:0;
+    font-size:1.4rem;
+    color:var(--brass);
+    transition:transform 0.15s ease, color 0.15s ease;
+  }
+  .report-card:hover .report-arrow{
+    color:var(--red);
+    transform:translateX(4px);
+  }
+
+  @media (max-width:480px){
+    .report-card{padding:16px 18px; gap:14px;}
+    .report-title{font-size:0.92rem;}
+  }
+
   /* ===== Footer ===== */
   footer{ margin-top:70px; background:var(--navy-deep); color:#a9b2c9; }
   .foot-inner{
@@ -345,6 +432,22 @@
       </figcaption>
     </figure>
 
+  </div>
+
+  <div class="report-section">
+    <div class="page-title">
+      <span class="section-deco">✦</span>
+      <h3>Related</h3>
+      <div class="section-line"></div>
+    </div>
+    <a class="report-card" href="timeline.html">
+      <span class="report-num">No. 01</span>
+      <div class="report-body">
+        <span class="report-title">アメリカ史 年表</span>
+        <span class="report-desc">植民地時代〜現代 · 出来事の流れをまとめて見る</span>
+      </div>
+      <span class="report-arrow">›</span>
+    </a>
   </div>
 
   <p class="note">NOTE — 画像が用意でき次第、順次差し替えていきます。</p>
