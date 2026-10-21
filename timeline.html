@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TIMELINE ―― AMERICA ON AIR</title>
+<title>アメリカ史 年表 ―― AMERICA ON AIR</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -17,6 +17,7 @@
     --white:#FFFFFF;
     --brass:#B8925A;
     --ink:#1B1B1B;
+    --wiki-link:#16409a;
   }
 
   *{box-sizing:border-box;}
@@ -31,7 +32,6 @@
   a{color:inherit;}
 
   .display{font-family:'Bebas Neue', sans-serif; letter-spacing:0.04em;}
-  .type{font-family:'Special Elite', monospace; letter-spacing:0.02em;}
 
   /* ===== Header (shared) ===== */
   header{
@@ -112,123 +112,197 @@
     background:repeating-linear-gradient(90deg, var(--red) 0 10px, var(--white) 10px 12px, var(--navy) 12px 22px, var(--white) 22px 24px);
   }
 
-  /* ===== Page head ===== */
-  .page-head{
-    background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
-    color:var(--cream);
-    padding:44px 24px 34px;
-  }
-  .page-head-inner{max-width:900px; margin:0 auto;}
-  .freq-badge{
-    display:inline-block;
-    font-family:'Special Elite', monospace;
-    font-size:0.75rem;
-    letter-spacing:0.14em;
-    color:var(--red);
-    background:rgba(183,41,60,0.12);
-    border:1px solid var(--red);
-    padding:4px 10px;
-    margin-bottom:16px;
-  }
-  .page-head h1{
-    font-family:'Bebas Neue', sans-serif;
-    font-size:clamp(2.2rem, 6vw, 3.4rem);
-    margin:0 0 8px;
-    color:var(--white);
-    letter-spacing:0.03em;
-  }
-  .page-head p{
-    color:#cfd6e6;
-    font-style:italic;
-    margin:0;
-    max-width:520px;
-  }
+  /* ===== Wikipedia-style article ===== */
+  main{max-width:960px; margin:0 auto; padding:34px 24px 20px;}
+
   .back-link{
     display:inline-block;
-    margin-top:18px;
+    margin-bottom:14px;
     font-family:'Special Elite', monospace;
     font-size:0.75rem;
-    letter-spacing:0.04em;
-    color:var(--brass);
+    color:var(--navy);
     text-decoration:none;
-    border-bottom:1px solid rgba(184,146,90,0.4);
+    border-bottom:1px solid rgba(22,35,63,0.35);
     padding-bottom:2px;
   }
-  .back-link:hover{ color:var(--cream); }
+  .back-link:hover{ color:var(--red); border-color:var(--red); }
 
-  /* ===== Timeline ===== */
-  main{max-width:820px; margin:0 auto; padding:50px 24px 20px;}
+  .article{
+    background:var(--white);
+    border:1px solid rgba(22,35,63,0.25);
+    padding:26px 34px 40px;
+    font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP','Meiryo',sans-serif;
+    font-size:0.94rem;
+    line-height:1.85;
+    color:#202122;
+  }
 
-  .section-eyebrow{
+  .article h1{
+    font-family:'Hiragino Mincho ProN','Noto Serif JP','Linux Libertine',Georgia,serif;
+    font-weight:400;
+    font-size:1.9rem;
+    line-height:1.3;
+    margin:0 0 4px;
+    padding-bottom:6px;
+    border-bottom:1px solid #a2a9b1;
+    color:#000;
+  }
+  .article .tagline{
+    font-size:0.8rem;
+    color:#54595d;
+    margin:6px 0 16px;
+  }
+
+  .article p{ margin:0.5em 0 0.9em; }
+
+  /* ----- TOC (radio program guide style) ----- */
+  .toc{
+    display:block;
+    max-width:440px;
+    background:#fbf8ef;
+    border:2px solid var(--navy);
+    box-shadow:6px 6px 0 var(--red);
+    margin:18px 0 32px 0;
+    padding:0;
+    font-size:0.88rem;
+    line-height:1.6;
+  }
+  .toc summary{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+    list-style:none;
+    background:var(--navy);
+    color:var(--cream);
+    padding:9px 14px;
+    border-bottom:3px solid var(--brass);
+  }
+  .toc summary::-webkit-details-marker{ display:none; }
+  .toc summary::before{
+    content:"";
+    flex-shrink:0;
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--red);
+    box-shadow:0 0 6px var(--red);
+  }
+  .toc-title{
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:0.14em;
+    font-size:1.1rem;
+    line-height:1.2;
+  }
+  .toc-title small{
+    font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP','Meiryo',sans-serif;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    color:var(--brass);
+    margin-left:10px;
+  }
+  .toc summary::after{
+    content:"▲ CLOSE";
+    margin-left:auto;
+    font-family:'Special Elite', monospace;
+    font-size:0.62rem;
+    letter-spacing:0.08em;
+    color:var(--brass);
+  }
+  .toc:not([open]) summary::after{ content:"▼ OPEN"; }
+
+  .toc > ol{
+    list-style:none;
+    margin:0;
+    padding:14px 18px 16px;
+    counter-reset:t1;
+    background:
+      repeating-linear-gradient(180deg, transparent 0 27px, rgba(22,35,63,0.05) 27px 28px);
+  }
+  .toc > ol > li{
+    counter-increment:t1;
+    margin:10px 0 0;
+  }
+  .toc > ol > li:first-child{ margin-top:0; }
+  .toc > ol > li > a{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:700;
+    color:var(--navy);
+    text-decoration:none;
+  }
+  .toc > ol > li > a::before{
+    content:counter(t1, decimal-leading-zero);
+    flex-shrink:0;
+    min-width:28px;
+    text-align:center;
+    font-family:'Special Elite', monospace;
+    font-size:0.72rem;
+    color:var(--white);
+    background:var(--red);
+    padding:2px 0;
+  }
+  .toc > ol > li > a:hover{ color:var(--red); }
+
+  .toc ol ol{
+    list-style:none;
+    margin:3px 0 0;
+    padding:0 0 0 14px;
+    counter-reset:t2;
+    border-left:1px solid rgba(184,146,90,0.6);
+    margin-left:13px;
+  }
+  .toc ol ol > li{
+    counter-increment:t2;
+    margin:1px 0;
+  }
+  .toc ol ol > li > a{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    font-weight:400;
+    color:#333;
+    text-decoration:none;
+    padding:1px 0 1px 4px;
+  }
+  .toc ol ol > li > a::before{
+    content:counter(t1) "." counter(t2);
+    flex-shrink:0;
     font-family:'Special Elite', monospace;
     font-size:0.7rem;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--red);
-    margin:0 0 8px;
+    color:var(--brass);
   }
-  h2{
-    font-family:'Bebas Neue', sans-serif;
-    letter-spacing:0.03em;
-    font-size:clamp(1.6rem, 4vw, 2.2rem);
-    margin:0 0 40px;
-    color:var(--navy);
+  .toc ol ol > li > a:hover{ color:var(--red); }
+
+  /* ----- sections ----- */
+  .article h2{
+    font-family:'Hiragino Mincho ProN','Noto Serif JP','Linux Libertine',Georgia,serif;
+    font-weight:400;
+    font-size:1.45rem;
+    line-height:1.3;
+    margin:1.4em 0 0.5em;
+    padding-bottom:3px;
+    border-bottom:1px solid #a2a9b1;
+    color:#000;
+  }
+  .article h3{
+    font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP','Meiryo',sans-serif;
+    font-weight:700;
+    font-size:1.1rem;
+    margin:1.1em 0 0.3em;
+    color:#000;
   }
 
-  .timeline{
-    position:relative;
-    padding-left:32px;
-    border-left:2px solid var(--navy);
-  }
-
-  .t-item{
-    position:relative;
-    padding-bottom:38px;
-  }
-  .t-item:last-child{padding-bottom:4px;}
-
-  .t-item::before{
-    content:"";
-    position:absolute;
-    left:-38px;
-    top:4px;
-    width:12px;
-    height:12px;
-    border-radius:50%;
-    background:var(--cream);
-    border:3px solid var(--red);
-  }
-
-  .t-year{
-    font-family:'Special Elite', monospace;
-    font-size:0.95rem;
-    color:var(--red);
-    display:inline-block;
-    margin-bottom:4px;
-  }
-  .t-title{
-    font-family:'Bebas Neue', sans-serif;
-    letter-spacing:0.02em;
-    font-size:1.3rem;
-    color:var(--navy);
-    margin:0 0 6px;
-  }
-  .t-desc{
-    margin:0;
-    color:#333;
-    font-size:0.96rem;
-    max-width:560px;
-  }
-
-  .t-item.major .t-year{ font-size:1.05rem; }
-  .t-item.major::before{
-    width:14px; height:14px; left:-39px;
-    border-color:var(--navy);
-    background:var(--brass);
+  .notes{
+    margin-top:2em;
+    font-size:0.8rem;
+    color:#54595d;
+    border-top:1px solid #c8ccd1;
+    padding-top:10px;
   }
 
   /* ===== Footer ===== */
-  footer{ margin-top:70px; background:var(--navy-deep); color:#a9b2c9; }
+  footer{ margin-top:60px; background:var(--navy-deep); color:#a9b2c9; }
   .foot-inner{
     max-width:1080px;
     margin:0 auto;
@@ -249,11 +323,9 @@
 
   @media (max-width:640px){
     nav a{border-right:none; border-bottom:1px solid rgba(255,255,255,0.1); flex:1 1 45%;}
-  }
-  @media (max-width:480px){
-    .timeline{padding-left:24px;}
-    .t-item::before{left:-30px;}
-    .t-item.major::before{left:-31px;}
+    .article{ padding:20px 18px 32px; }
+    .article h1{ font-size:1.5rem; }
+    .article h2{ font-size:1.25rem; }
   }
 </style>
 </head>
@@ -277,102 +349,112 @@
   </nav>
 </header>
 
-<section class="page-head">
-  <div class="page-head-inner">
-    <span class="freq-badge">PROGRAM SCHEDULE</span>
-    <h1>TIMELINE</h1>
-    <p>植民地時代から現代まで。放送局の年表棚から、主な出来事を並べています。</p>
-    <a class="back-link" href="gallery.html">← GALLERY へ戻る</a>
-  </div>
-</section>
-
 <div class="pinstripe"></div>
 
 <main>
-  <p class="section-eyebrow">Chronology</p>
-  <h2>アメリカ史 年表</h2>
+  <a class="back-link" href="gallery.html">← GALLERY へ戻る</a>
 
-  <div class="timeline">
+  <article class="article">
+    <h1>アメリカ史 年表</h1>
+    <p class="tagline">AMERICA ON AIR より</p>
 
-    <div class="t-item major">
-      <span class="t-year">1607</span>
-      <h3 class="t-title">ジェームズタウン建設</h3>
-      <p class="t-desc">イギリスによる北米初の恒久的植民地が、現在のバージニアに築かれる。</p>
-    </div>
+    <p>この項目では、アメリカ合衆国の歴史における主な出来事を、時代ごとに整理して記述する。</p>
 
-    <div class="t-item">
-      <span class="t-year">1620</span>
-      <h3 class="t-title">メイフラワー号、プリマスへ</h3>
-      <p class="t-desc">ピルグリム・ファーザーズが大西洋を渡り、ニューイングランド植民地の礎を築く。</p>
-    </div>
+    <details class="toc" open>
+      <summary><span class="toc-title">PROGRAM GUIDE<small>目次</small></span></summary>
+      <ol>
+        <li><a href="#colonial">植民地時代</a>
+          <ol>
+            <li><a href="#jamestown">ジェームズタウンの建設</a></li>
+            <li><a href="#mayflower">メイフラワー号とプリマス植民地</a></li>
+          </ol>
+        </li>
+        <li><a href="#founding">独立と建国</a>
+          <ol>
+            <li><a href="#declaration">独立宣言</a></li>
+            <li><a href="#constitution">合衆国憲法の制定</a></li>
+          </ol>
+        </li>
+        <li><a href="#expansion">領土の拡大</a>
+          <ol>
+            <li><a href="#louisiana">ルイジアナ購入</a></li>
+          </ol>
+        </li>
+        <li><a href="#civilwar">南北戦争と奴隷制の廃止</a>
+          <ol>
+            <li><a href="#war">南北戦争</a></li>
+            <li><a href="#abolition">奴隷制の廃止</a></li>
+          </ol>
+        </li>
+        <li><a href="#early20">20世紀前半</a>
+          <ol>
+            <li><a href="#suffrage">女性参政権</a></li>
+            <li><a href="#depression">世界恐慌</a></li>
+            <li><a href="#ww2">第二次世界大戦への参戦</a></li>
+          </ol>
+        </li>
+        <li><a href="#late20">20世紀後半</a>
+          <ol>
+            <li><a href="#civilrights">公民権運動</a></li>
+            <li><a href="#apollo">アポロ計画</a></li>
+          </ol>
+        </li>
+        <li><a href="#c21">21世紀</a>
+          <ol>
+            <li><a href="#sept11">同時多発テロ</a></li>
+          </ol>
+        </li>
+      </ol>
+    </details>
 
-    <div class="t-item major">
-      <span class="t-year">1776</span>
-      <h3 class="t-title">独立宣言</h3>
-      <p class="t-desc">13植民地がイギリスからの独立を宣言。7月4日は今も独立記念日として祝われる。</p>
-    </div>
+    <h2 id="colonial">植民地時代</h2>
+    <h3 id="jamestown">ジェームズタウンの建設</h3>
+    <p>1607年、イギリスのバージニア会社によって、現在のバージニア州にジェームズタウンが建設された。これは北アメリカにおけるイギリス初の恒久的な植民地とされる。入植初期は飢餓や疫病に苦しんだが、のちにタバコの栽培が軌道に乗り、植民地の経済的基盤となった。</p>
 
-    <div class="t-item">
-      <span class="t-year">1787</span>
-      <h3 class="t-title">合衆国憲法制定</h3>
-      <p class="t-desc">フィラデルフィア憲法制定会議で、現行のアメリカ合衆国憲法が採択される。</p>
-    </div>
+    <h3 id="mayflower">メイフラワー号とプリマス植民地</h3>
+    <p>1620年、信仰の自由を求めた清教徒（ピルグリム・ファーザーズ）らがメイフラワー号で大西洋を渡り、現在のマサチューセッツ州にプリマス植民地を築いた。上陸前に作成された「メイフラワー誓約」は、自治の原型として知られる。以後、北東部にはニューイングランド植民地が形成されていった。</p>
 
-    <div class="t-item">
-      <span class="t-year">1803</span>
-      <h3 class="t-title">ルイジアナ購入</h3>
-      <p class="t-desc">フランスから広大な西部の土地を買収し、国土がほぼ倍増する。</p>
-    </div>
+    <h2 id="founding">独立と建国</h2>
+    <h3 id="declaration">独立宣言</h3>
+    <p>18世紀後半、イギリス本国の課税政策に対する反発が強まり、1775年に独立戦争が始まった。翌1776年7月4日、大陸会議は13植民地の独立を宣言する文書を採択した。起草の中心を担ったのはトーマス・ジェファーソンである。この日は現在もアメリカの独立記念日として祝われている。</p>
 
-    <div class="t-item major">
-      <span class="t-year">1861‑1865</span>
-      <h3 class="t-title">南北戦争</h3>
-      <p class="t-desc">奴隷制をめぐり北部と南部が衝突。1865年の終結後、憲法修正第13条で奴隷制が廃止される。</p>
-    </div>
+    <h3 id="constitution">合衆国憲法の制定</h3>
+    <p>独立後の連合規約のもとでは中央政府の権限が弱く、1787年にフィラデルフィアで憲法制定会議が開かれた。ここで起草された合衆国憲法は、連邦政府に立法・行政・司法の三権を設け、権力の分立と均衡を定めた。憲法は1788年に批准され、1789年に発効した。</p>
 
-    <div class="t-item">
-      <span class="t-year">1920</span>
-      <h3 class="t-title">女性参政権の獲得</h3>
-      <p class="t-desc">憲法修正第19条により、女性の投票権が全米で正式に認められる。</p>
-    </div>
+    <h2 id="expansion">領土の拡大</h2>
+    <h3 id="louisiana">ルイジアナ購入</h3>
+    <p>1803年、ジェファーソン大統領の時代に、アメリカはフランスからミシシッピ川以西の広大なルイジアナ地域を購入した。この取引により、合衆国の国土はほぼ倍増した。以後、アメリカは西部への進出を加速させていく。</p>
 
-    <div class="t-item">
-      <span class="t-year">1921</span>
-      <h3 class="t-title">アル・カポネ</h3>
-      <p class="t-desc">ジョン・"パパ・ジョニー"・トーリオに雇われたアル・カポネが闇社会を牛耳る。</p>
-    </div>
+    <h2 id="civilwar">南北戦争と奴隷制の廃止</h2>
+    <h3 id="war">南北戦争</h3>
+    <p>奴隷制の存廃をはじめとする北部と南部の対立は、1860年のリンカーンの大統領当選を契機に決定的となり、南部諸州が合衆国から離脱した。1861年に南北戦争が勃発し、1865年に北部の勝利で終結した。戦争による死者は、アメリカが関与した戦争の中でも最大規模に及ぶとされる。</p>
 
-    <div class="t-item major">
-      <span class="t-year">1929</span>
-      <h3 class="t-title">世界恐慌はじまる</h3>
-      <p class="t-desc">株式市場の暴落を発端に、世界規模の大不況が始まる。</p>
-    </div>
+    <h3 id="abolition">奴隷制の廃止</h3>
+    <p>リンカーンは1863年に奴隷解放宣言を発表した。戦争終結後の1865年、憲法修正第13条が批准され、奴隷制は合衆国全土で禁止された。その後の南部の再建をめぐっては、解放された人々の権利保障が大きな課題となった。</p>
 
-    <div class="t-item">
-      <span class="t-year">1941</span>
-      <h3 class="t-title">真珠湾攻撃・参戦</h3>
-      <p class="t-desc">日本軍による攻撃を受け、アメリカが第二次世界大戦に参戦する。</p>
-    </div>
+    <h2 id="early20">20世紀前半</h2>
+    <h3 id="suffrage">女性参政権</h3>
+    <p>19世紀半ばから続いた女性参政権運動は、1920年の憲法修正第19条の批准によって結実し、性別を理由に投票権を拒否・制限することが禁じられた。</p>
 
-    <div class="t-item">
-      <span class="t-year">1963</span>
-      <h3 class="t-title">ワシントン大行進</h3>
-      <p class="t-desc">公民権運動が高まりを見せ、キング牧師の演説が全米に響く。</p>
-    </div>
+    <h3 id="depression">世界恐慌</h3>
+    <p>1929年10月、ニューヨーク株式市場の株価が暴落し、これを発端に世界規模の大不況（世界恐慌）が始まった。アメリカでは失業者が急増し、のちにフランクリン・ルーズベルト大統領がニューディール政策によって景気回復と社会保障の整備を進めた。</p>
 
-    <div class="t-item major">
-      <span class="t-year">1969</span>
-      <h3 class="t-title">アポロ11号、月面着陸</h3>
-      <p class="t-desc">人類が初めて月面に降り立つ。冷戦下の宇宙開発競争の象徴的な瞬間。</p>
-    </div>
+    <h3 id="ww2">第二次世界大戦への参戦</h3>
+    <p>1941年12月7日（日本時間では12月8日）、日本海軍がハワイの真珠湾を攻撃した。これを受けてアメリカは日本に宣戦布告し、第二次世界大戦に本格的に参戦した。</p>
 
-    <div class="t-item">
-      <span class="t-year">2001</span>
-      <h3 class="t-title">同時多発テロ</h3>
-      <p class="t-desc">9月11日、ニューヨークなどで同時多発テロが発生。以後の外交・安全保障政策に大きな影響を与える。</p>
-    </div>
+    <h2 id="late20">20世紀後半</h2>
+    <h3 id="civilrights">公民権運動</h3>
+    <p>1950年代から1960年代にかけて、人種差別の撤廃を求める公民権運動が全米に広がった。1963年8月には、ワシントンで大規模な行進が行われ、マーティン・ルーサー・キング・ジュニアが演説を行った。運動の成果として、1964年には公民権法が成立している。</p>
 
-  </div>
+    <h3 id="apollo">アポロ計画</h3>
+    <p>冷戦下で米ソの宇宙開発競争が激化するなか、アメリカはアポロ計画を推進した。1969年7月、アポロ11号が人類で初めて月面への着陸に成功し、ニール・アームストロングとバズ・オルドリンが月面に降り立った。</p>
+
+    <h2 id="c21">21世紀</h2>
+    <h3 id="sept11">同時多発テロ</h3>
+    <p>2001年9月11日、旅客機を使った同時多発テロがニューヨークとワシントン近郊などで発生し、多数の死者を出した。アメリカはこれを受けて対テロ戦争を掲げ、同年にアフガニスタンへの軍事行動を開始するなど、以後の外交・安全保障政策に大きな影響を与えた。</p>
+
+    <p class="notes">この年表は学習記録として個人が作成したものであり、内容は今後の学習にあわせて加筆・修正される。</p>
+  </article>
 </main>
 
 <footer>
