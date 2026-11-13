@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アメリカ史に関する人物 ―― AMERICA ON AIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233F;
+    --navy-deep:#0E1730;
+    --red:#B7293C;
+    --red-deep:#8C1F2E;
+    --cream:#F6F1E4;
+    --white:#FFFFFF;
+    --brass:#B8925A;
+    --ink:#1B1B1B;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    line-height:1.75;
+  }
+  a{color:inherit;}
+
+  .display{font-family:'Bebas Neue', sans-serif; letter-spacing:0.04em;}
+
+  /* ===== Header (shared) ===== */
+  header{
+    background:var(--navy);
+    color:var(--cream);
+    border-bottom:4px solid var(--brass);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .nameplate{
+    max-width:1080px;
+    margin:0 auto;
+    padding:14px 24px 10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .callsign{display:flex; align-items:baseline; gap:12px;}
+  .callsign .display{
+    font-size:clamp(1.6rem, 4vw, 2.2rem);
+    color:var(--white);
+  }
+  .callsign .sub{
+    font-size:0.7rem;
+    letter-spacing:0.18em;
+    color:var(--brass);
+    text-transform:uppercase;
+  }
+  .onair{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Special Elite', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    color:#e8c3c9;
+    border:1px solid rgba(255,255,255,0.25);
+    padding:5px 10px;
+  }
+  .onair-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--red);
+    box-shadow:0 0 6px var(--red);
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.35;}}
+  @media (prefers-reduced-motion: reduce){ .onair-dot{animation:none;} }
+
+  nav{border-top:1px solid rgba(255,255,255,0.15);}
+  nav ul{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+    list-style:none;
+    display:flex;
+    gap:2px;
+    flex-wrap:wrap;
+  }
+  nav a{
+    display:block;
+    padding:11px 18px;
+    text-decoration:none;
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:0.1em;
+    font-size:0.95rem;
+    color:var(--cream);
+    border-right:1px solid rgba(255,255,255,0.12);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  nav a:hover, nav a.active{ background:var(--red); color:var(--white); }
+
+  /* ===== Pinstripe divider ===== */
+  .pinstripe{
+    height:6px;
+    background:repeating-linear-gradient(90deg, var(--red) 0 10px, var(--white) 10px 12px, var(--navy) 12px 22px, var(--white) 22px 24px);
+  }
+
+  /* ===== Page head ===== */
+  .page-head{
+    background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:var(--cream);
+    padding:44px 24px 34px;
+  }
+  .page-head-inner{max-width:960px; margin:0 auto;}
+  .freq-badge{
+    display:inline-block;
+    font-family:'Special Elite', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.14em;
+    color:var(--red);
+    background:rgba(183,41,60,0.12);
+    border:1px solid var(--red);
+    padding:4px 10px;
+    margin-bottom:16px;
+  }
+  .page-head h1{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:clamp(2rem, 5.5vw, 3.2rem);
+    margin:0 0 8px;
+    color:var(--white);
+    letter-spacing:0.03em;
+    line-height:1.2;
+  }
+  .page-head p{
+    color:#cfd6e6;
+    font-style:italic;
+    margin:0;
+    max-width:560px;
+  }
+
+  /* ===== Roster table ===== */
+  main{max-width:960px; margin:0 auto; padding:44px 24px 20px;}
+
+  .back-link{
+    display:inline-block;
+    margin-bottom:22px;
+    font-family:'Special Elite', monospace;
+    font-size:0.75rem;
+    color:var(--navy);
+    text-decoration:none;
+    border-bottom:1px solid rgba(22,35,63,0.35);
+    padding-bottom:2px;
+  }
+  .back-link:hover{ color:var(--red); border-color:var(--red); }
+  .back-link.bottom{ margin:36px 0 0; }
+
+  .roster{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--white);
+    border:1px solid rgba(22,35,63,0.2);
+    border-top:3px solid var(--navy);
+  }
+  .roster thead th{
+    background:var(--navy);
+    color:var(--cream);
+    font-family:'Bebas Neue', sans-serif;
+    font-weight:400;
+    letter-spacing:0.12em;
+    font-size:0.95rem;
+    text-align:left;
+    padding:10px 16px;
+    border-bottom:3px solid var(--brass);
+  }
+  .roster tbody tr{
+    border-bottom:1px solid rgba(22,35,63,0.12);
+  }
+  .roster tbody tr:nth-child(even){ background:#fbf8ef; }
+  .roster tbody tr:hover{ background:#f3ecda; }
+  .roster td{
+    padding:14px 16px;
+    vertical-align:top;
+    font-size:0.94rem;
+  }
+  .roster td.name{
+    width:27%;
+    font-weight:600;
+    color:var(--navy);
+    border-left:4px solid transparent;
+  }
+  .roster tbody tr:hover td.name{ border-left-color:var(--red); }
+  .roster td.year{
+    width:13%;
+    font-family:'Special Elite', monospace;
+    font-size:0.88rem;
+    color:var(--red);
+    white-space:nowrap;
+  }
+  .roster td.desc{
+    color:#333;
+  }
+
+  /* ===== Footer ===== */
+  footer{ margin-top:70px; background:var(--navy-deep); color:#a9b2c9; }
+  .foot-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:30px 24px 40px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:14px;
+    font-size:0.78rem;
+  }
+  .foot-inner .display{ color:var(--cream); font-size:1.1rem; }
+  .foot-note{
+    font-family:'Special Elite', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.04em;
+    color:#7c86a0;
+  }
+
+  @media (max-width:640px){
+    nav a{border-right:none; border-bottom:1px solid rgba(255,255,255,0.1); flex:1 1 45%;}
+
+    .roster, .roster tbody, .roster tr, .roster td{ display:block; width:100%; }
+    .roster thead{ display:none; }
+    .roster tbody tr{
+      padding:14px 16px;
+      border-left:4px solid var(--navy);
+    }
+    .roster td{ padding:0; }
+    .roster td.name{ width:100%; border-left:none; font-size:1rem; }
+    .roster tbody tr:hover td.name{ border-left:none; }
+    .roster td.year{ width:100%; margin:2px 0 6px; }
+    .roster td.year::before{ content:"没年 "; color:#8a8a8a; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nameplate">
+    <div class="callsign">
+      <span class="display">AMERICA ON AIR</span>
+      <span class="sub">アメリカ史 学習放送局</span>
+    </div>
+    <div class="onair"><span class="onair-dot"></span>ON AIR — 24 HOURS</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="blog.html">BLOG</a></li>
+      <li><a href="gallery.html">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="page-head">
+  <div class="page-head-inner">
+    <span class="freq-badge">REPORT No. 01</span>
+    <h1>アメリカ史に関する人物</h1>
+    <p>建国から宇宙開発まで、アメリカ史に名を残した人々を没年順にまとめました。</p>
+  </div>
+</section>
+
+<div class="pinstripe"></div>
+
+<main>
+  <a class="back-link" href="gallery.html">← GALLERY へ戻る</a>
+
+  <table class="roster">
+    <thead>
+      <tr>
+        <th>人物</th>
+        <th>没年</th>
+        <th>解説</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name">ベンジャミン・フランクリン</td>
+        <td class="year">1790年</td>
+        <td class="desc">政治家・科学者・外交官。独立宣言と合衆国憲法の制定に関わり、避雷針の発明でも知られる。</td>
+      </tr>
+      <tr>
+        <td class="name">ジョージ・ワシントン</td>
+        <td class="year">1799年</td>
+        <td class="desc">独立戦争で大陸軍を率いた総司令官。初代大統領を務め、アメリカ建国の父と呼ばれる。</td>
+      </tr>
+      <tr>
+        <td class="name">アレクサンダー・ハミルトン</td>
+        <td class="year">1804年</td>
+        <td class="desc">初代財務長官。連邦政府の財政基盤を整えた。副大統領アーロン・バーとの決闘で命を落とした。</td>
+      </tr>
+      <tr>
+        <td class="name">トーマス・ジェファーソン</td>
+        <td class="year">1826年</td>
+        <td class="desc">独立宣言の起草の中心人物で、第3代大統領。在任中にルイジアナを購入し、国土を大きく広げた。</td>
+      </tr>
+      <tr>
+        <td class="name">エイブラハム・リンカーン</td>
+        <td class="year">1865年</td>
+        <td class="desc">第16代大統領。南北戦争を指導し、奴隷解放宣言を発表した。戦争終結の直後に暗殺された。</td>
+      </tr>
+      <tr>
+        <td class="name">フレデリック・ダグラス</td>
+        <td class="year">1895年</td>
+        <td class="desc">奴隷の身分から脱出し、廃止論者・作家・演説家として奴隷制廃止を訴え続けた。</td>
+      </tr>
+      <tr>
+        <td class="name">スーザン・B・アンソニー</td>
+        <td class="year">1906年</td>
+        <td class="desc">女性参政権運動の指導者。生涯をかけて女性の投票権を訴えたが、実現は没後の1920年だった。</td>
+      </tr>
+      <tr>
+        <td class="name">ハリエット・タブマン</td>
+        <td class="year">1913年</td>
+        <td class="desc">自らも奴隷から逃れ、「地下鉄道」と呼ばれる逃亡支援の活動で多くの人々を自由の地へ導いた。</td>
+      </tr>
+      <tr>
+        <td class="name">セオドア・ルーズベルト</td>
+        <td class="year">1919年</td>
+        <td class="desc">第26代大統領。革新主義の改革を進め、パナマ運河の建設や自然保護政策にも力を入れた。</td>
+      </tr>
+      <tr>
+        <td class="name">フランクリン・D・ルーズベルト</td>
+        <td class="year">1945年</td>
+        <td class="desc">第32代大統領。世界恐慌後にニューディール政策を実施し、第二次世界大戦期にも国を率いた。</td>
+      </tr>
+      <tr>
+        <td class="name">ジョン・F・ケネディ</td>
+        <td class="year">1963年</td>
+        <td class="desc">第35代大統領。キューバ危機に対処し、月への有人飛行を国家目標に掲げた。在任中に暗殺された。</td>
+      </tr>
+      <tr>
+        <td class="name">マーティン・ルーサー・キング・ジュニア</td>
+        <td class="year">1968年</td>
+        <td class="desc">非暴力を掲げた公民権運動の指導者。1963年のワシントン大行進で演説し、1968年に暗殺された。</td>
+      </tr>
+      <tr>
+        <td class="name">ニール・アームストロング</td>
+        <td class="year">2012年</td>
+        <td class="desc">アポロ11号の船長。1969年に人類で初めて月面に降り立った宇宙飛行士。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a class="back-link bottom" href="gallery.html">← GALLERY へ戻る</a>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div>
+      <span class="display">AMERICA ON AIR</span><br>
+      <span class="foot-note">A small station broadcasting American history, one entry at a time.</span>
+    </div>
+    <div class="foot-note">© 2026 Azalea Creative Room</div>
+  </div>
+</footer>
+
+</body>
+</html>
