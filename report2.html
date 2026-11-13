@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美術史に関わる人物 ―― AMERICA ON AIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233F;
+    --navy-deep:#0E1730;
+    --red:#B7293C;
+    --red-deep:#8C1F2E;
+    --cream:#F6F1E4;
+    --white:#FFFFFF;
+    --brass:#B8925A;
+    --ink:#1B1B1B;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    line-height:1.75;
+  }
+  a{color:inherit;}
+
+  .display{font-family:'Bebas Neue', sans-serif; letter-spacing:0.04em;}
+
+  /* ===== Header (shared) ===== */
+  header{
+    background:var(--navy);
+    color:var(--cream);
+    border-bottom:4px solid var(--brass);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .nameplate{
+    max-width:1080px;
+    margin:0 auto;
+    padding:14px 24px 10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .callsign{display:flex; align-items:baseline; gap:12px;}
+  .callsign .display{
+    font-size:clamp(1.6rem, 4vw, 2.2rem);
+    color:var(--white);
+  }
+  .callsign .sub{
+    font-size:0.7rem;
+    letter-spacing:0.18em;
+    color:var(--brass);
+    text-transform:uppercase;
+  }
+  .onair{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Special Elite', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    color:#e8c3c9;
+    border:1px solid rgba(255,255,255,0.25);
+    padding:5px 10px;
+  }
+  .onair-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--red);
+    box-shadow:0 0 6px var(--red);
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.35;}}
+  @media (prefers-reduced-motion: reduce){ .onair-dot{animation:none;} }
+
+  nav{border-top:1px solid rgba(255,255,255,0.15);}
+  nav ul{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+    list-style:none;
+    display:flex;
+    gap:2px;
+    flex-wrap:wrap;
+  }
+  nav a{
+    display:block;
+    padding:11px 18px;
+    text-decoration:none;
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:0.1em;
+    font-size:0.95rem;
+    color:var(--cream);
+    border-right:1px solid rgba(255,255,255,0.12);
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  nav a:hover, nav a.active{ background:var(--red); color:var(--white); }
+
+  /* ===== Pinstripe divider ===== */
+  .pinstripe{
+    height:6px;
+    background:repeating-linear-gradient(90deg, var(--red) 0 10px, var(--white) 10px 12px, var(--navy) 12px 22px, var(--white) 22px 24px);
+  }
+
+  /* ===== Page head ===== */
+  .page-head{
+    background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:var(--cream);
+    padding:44px 24px 34px;
+  }
+  .page-head-inner{max-width:960px; margin:0 auto;}
+  .freq-badge{
+    display:inline-block;
+    font-family:'Special Elite', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.14em;
+    color:var(--red);
+    background:rgba(183,41,60,0.12);
+    border:1px solid var(--red);
+    padding:4px 10px;
+    margin-bottom:16px;
+  }
+  .page-head h1{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:clamp(2rem, 5.5vw, 3.2rem);
+    margin:0 0 8px;
+    color:var(--white);
+    letter-spacing:0.03em;
+    line-height:1.2;
+  }
+  .page-head p{
+    color:#cfd6e6;
+    font-style:italic;
+    margin:0;
+    max-width:560px;
+  }
+
+  /* ===== Roster table ===== */
+  main{max-width:960px; margin:0 auto; padding:44px 24px 20px;}
+
+  .back-link{
+    display:inline-block;
+    margin-bottom:22px;
+    font-family:'Special Elite', monospace;
+    font-size:0.75rem;
+    color:var(--navy);
+    text-decoration:none;
+    border-bottom:1px solid rgba(22,35,63,0.35);
+    padding-bottom:2px;
+  }
+  .back-link:hover{ color:var(--red); border-color:var(--red); }
+  .back-link.bottom{ margin:36px 0 0; }
+
+  .roster{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--white);
+    border:1px solid rgba(22,35,63,0.2);
+    border-top:3px solid var(--navy);
+  }
+  .roster thead th{
+    background:var(--navy);
+    color:var(--cream);
+    font-family:'Bebas Neue', sans-serif;
+    font-weight:400;
+    letter-spacing:0.12em;
+    font-size:0.95rem;
+    text-align:left;
+    padding:10px 16px;
+    border-bottom:3px solid var(--brass);
+  }
+  .roster tbody tr{
+    border-bottom:1px solid rgba(22,35,63,0.12);
+  }
+  .roster tbody tr:nth-child(even){ background:#fbf8ef; }
+  .roster tbody tr:hover{ background:#f3ecda; }
+  .roster td{
+    padding:14px 16px;
+    vertical-align:top;
+    font-size:0.94rem;
+  }
+  .roster td.name{
+    width:24%;
+    font-weight:600;
+    color:var(--navy);
+    border-left:4px solid transparent;
+  }
+  .roster tbody tr:hover td.name{ border-left-color:var(--red); }
+  .roster td.year{
+    width:11%;
+    font-family:'Special Elite', monospace;
+    font-size:0.88rem;
+    color:var(--red);
+    white-space:nowrap;
+  }
+  .roster td.country{
+    width:12%;
+    color:var(--navy);
+    font-size:0.9rem;
+    white-space:nowrap;
+  }
+  .roster td.desc{
+    color:#333;
+  }
+
+  /* ===== Footer ===== */
+  footer{ margin-top:70px; background:var(--navy-deep); color:#a9b2c9; }
+  .foot-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:30px 24px 40px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:14px;
+    font-size:0.78rem;
+  }
+  .foot-inner .display{ color:var(--cream); font-size:1.1rem; }
+  .foot-note{
+    font-family:'Special Elite', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.04em;
+    color:#7c86a0;
+  }
+
+  @media (max-width:640px){
+    nav a{border-right:none; border-bottom:1px solid rgba(255,255,255,0.1); flex:1 1 45%;}
+
+    .roster, .roster tbody, .roster tr, .roster td{ display:block; width:100%; }
+    .roster thead{ display:none; }
+    .roster tbody tr{
+      padding:14px 16px;
+      border-left:4px solid var(--navy);
+    }
+    .roster td{ padding:0; }
+    .roster td.name{ width:100%; border-left:none; font-size:1rem; }
+    .roster tbody tr:hover td.name{ border-left:none; }
+    .roster td.year, .roster td.country{ display:inline-block; width:auto; margin:2px 14px 6px 0; }
+    .roster td.year::before{ content:"没年 "; color:#8a8a8a; }
+    .roster td.country::before{ content:"国 "; color:#8a8a8a; }
+    .roster td.desc{ display:block; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nameplate">
+    <div class="callsign">
+      <span class="display">AMERICA ON AIR</span>
+      <span class="sub">アメリカ史 学習放送局</span>
+    </div>
+    <div class="onair"><span class="onair-dot"></span>ON AIR — 24 HOURS</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="blog.html">BLOG</a></li>
+      <li><a href="gallery.html">GALLERY</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="page-head">
+  <div class="page-head-inner">
+    <span class="freq-badge">REPORT No. 02</span>
+    <h1>美術史に関わる人物</h1>
+    <p>ルネサンスから現代まで、美術史に名を残した人々を没年順にまとめました。</p>
+  </div>
+</section>
+
+<div class="pinstripe"></div>
+
+<main>
+  <a class="back-link" href="gallery.html">← GALLERY へ戻る</a>
+
+  <table class="roster">
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>没年</th>
+        <th>国</th>
+        <th>解説</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name">ジョット・ディ・ボンドーネ</td>
+        <td class="year">1337年</td>
+        <td class="country">イタリア</td>
+        <td class="desc">中世からルネサンスへの橋渡しをした画家。人物に立体感と感情表現を与えた壁画で知られる。</td>
+      </tr>
+      <tr>
+        <td class="name">サンドロ・ボッティチェリ</td>
+        <td class="year">1510年</td>
+        <td class="country">イタリア</td>
+        <td class="desc">フィレンツェで活躍した初期ルネサンスの画家。「ヴィーナスの誕生」「春」が代表作。</td>
+      </tr>
+      <tr>
+        <td class="name">レオナルド・ダ・ヴィンチ</td>
+        <td class="year">1519年</td>
+        <td class="country">イタリア</td>
+        <td class="desc">画家・科学者・技術者。「モナ・リザ」「最後の晩餐」を描き、万能の天才と呼ばれる。</td>
+      </tr>
+      <tr>
+        <td class="name">ラファエロ・サンティ</td>
+        <td class="year">1520年</td>
+        <td class="country">イタリア</td>
+        <td class="desc">調和のとれた優美な聖母像で知られる盛期ルネサンスの画家。バチカンの壁画「アテネの学堂」が有名。</td>
+      </tr>
+      <tr>
+        <td class="name">ミケランジェロ・ブオナローティ</td>
+        <td class="year">1564年</td>
+        <td class="country">イタリア</td>
+        <td class="desc">彫刻家・画家・建築家。「ダヴィデ像」やシスティーナ礼拝堂の天井画を手がけた。</td>
+      </tr>
+      <tr>
+        <td class="name">レンブラント・ファン・レイン</td>
+        <td class="year">1669年</td>
+        <td class="country">オランダ</td>
+        <td class="desc">17世紀オランダ黄金時代を代表する画家。光と影の表現にすぐれ、「夜警」で知られる。</td>
+      </tr>
+      <tr>
+        <td class="name">ヨハネス・フェルメール</td>
+        <td class="year">1675年</td>
+        <td class="country">オランダ</td>
+        <td class="desc">室内の静かな情景を細やかな光で描いた画家。「真珠の耳飾りの少女」が代表作。</td>
+      </tr>
+      <tr>
+        <td class="name">葛飾北斎</td>
+        <td class="year">1849年</td>
+        <td class="country">日本</td>
+        <td class="desc">浮世絵師。「冨嶽三十六景」で知られ、その作品は西洋の画家たちにも影響を与えたとされる。</td>
+      </tr>
+      <tr>
+        <td class="name">J・M・W・ターナー</td>
+        <td class="year">1851年</td>
+        <td class="country">イギリス</td>
+        <td class="desc">光と大気の表現を追求したロマン主義の風景画家。のちの印象派にも影響を与えた。</td>
+      </tr>
+      <tr>
+        <td class="name">フィンセント・ファン・ゴッホ</td>
+        <td class="year">1890年</td>
+        <td class="country">オランダ</td>
+        <td class="desc">ポスト印象派の画家。「ひまわり」「星月夜」などを描き、生前に評価されることは少なかった。</td>
+      </tr>
+      <tr>
+        <td class="name">ポール・セザンヌ</td>
+        <td class="year">1906年</td>
+        <td class="country">フランス</td>
+        <td class="desc">「近代絵画の父」と呼ばれる画家。物の形を幾何学的にとらえる手法が、のちのキュビスムにつながった。</td>
+      </tr>
+      <tr>
+        <td class="name">クロード・モネ</td>
+        <td class="year">1926年</td>
+        <td class="country">フランス</td>
+        <td class="desc">印象派の名の由来となった「印象・日の出」を描いた画家。晩年は「睡蓮」の連作に取り組んだ。</td>
+      </tr>
+      <tr>
+        <td class="name">パブロ・ピカソ</td>
+        <td class="year">1973年</td>
+        <td class="country">スペイン</td>
+        <td class="desc">ブラックとともにキュビスムを創始した20世紀を代表する芸術家。大作「ゲルニカ」で知られる。</td>
+      </tr>
+      <tr>
+        <td class="name">アンディ・ウォーホル</td>
+        <td class="year">1987年</td>
+        <td class="country">アメリカ</td>
+        <td class="desc">ポップ・アートを代表する美術家。シルクスクリーンで「キャンベルのスープ缶」などを制作した。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a class="back-link bottom" href="gallery.html">← GALLERY へ戻る</a>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div>
+      <span class="display">AMERICA ON AIR</span><br>
+      <span class="foot-note">A small station broadcasting American history, one entry at a time.</span>
+    </div>
+    <div class="foot-note">© 2026 Azalea Creative Room</div>
+  </div>
+</footer>
+
+</body>
+</html>
